@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.MemberMapper">
+		<resultMap type="Member" id="memberResult">
+			<id property="id" column="id"/>
+			<result property="username" column="username"/>
+			<result property="pwd" column="pwd"/>
+			<result property="name" column="name"/>
+			<result property="pic" column="pic"/>
+			<result property="sdate" column="sdate"/>
+			<result property="tel" column="tel"/>
+			<result property="sex" column="sex"/>
+			<result property="email" column="email"/>
+		</resultMap>
+		<insert id="insert" parameterType="Member">
+			insert into member
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">username,</if>
+			<if test="pwd != null">pwd,</if>
+			<if test="name != null">name,</if>
+			<if test="pic != null">pic,</if>
+			<if test="sdate != null">sdate,</if>
+			<if test="tel != null">tel,</if>
+			<if test="sex != null">sex,</if>
+			<if test="email != null">email,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">#{username},</if>
+			<if test="pwd != null">#{pwd},</if>
+			<if test="name != null">#{name},</if>
+			<if test="pic != null">#{pic},</if>
+			<if test="sdate != null">#{sdate},</if>
+			<if test="tel != null">#{tel},</if>
+			<if test="sex != null">#{sex},</if>
+			<if test="email != null">#{email},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Member">
+			update member
+			<trim prefix="set" suffixOverrides=",">
+			<if test="username != null">username=#{username},</if>
+			<if test="pwd != null">pwd=#{pwd},</if>
+			<if test="name != null">name=#{name},</if>
+			<if test="pic != null">pic=#{pic},</if>
+			<if test="sdate != null">sdate=#{sdate},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="email != null">email=#{email},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Member">
+			delete from member where id= #{id}
+		</delete>
+		<select id="list" resultType="Member" resultMap="memberResult">
+			select * from  member where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Member" resultMap="memberResult">
+			select * from  member where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="int" resultType="Member">
+			select * from  Member  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from member ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Member">
+			select * from  member ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

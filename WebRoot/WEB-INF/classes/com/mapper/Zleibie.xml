@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.ZleibieMapper">
+		<resultMap type="Zleibie" id="zleibieResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+		</resultMap>
+		<insert id="insert" parameterType="Zleibie">
+			insert into zleibie (name) values (#{name})
+		</insert>
+		<update id="update" parameterType="Zleibie">
+			update zleibie set name=#{name} where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Zleibie">
+			delete from zleibie where id= #{id}
+		</delete>
+		<select id="list" resultType="Zleibie" resultMap="zleibieResult">
+			select * from  zleibie where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Zleibie" resultMap="zleibieResult">
+			select * from  zleibie where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Zleibie">
+			select * from  Zleibie  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from zleibie ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Zleibie">
+			select * from  zleibie ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

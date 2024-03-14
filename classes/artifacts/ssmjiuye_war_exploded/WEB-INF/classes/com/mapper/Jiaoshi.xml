@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.JiaoshiMapper">
+		<resultMap type="Jiaoshi" id="jiaoshiResult">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="sex" column="sex"/>
+			<result property="xueyuan" column="xueyuan"/>
+			<result property="tel" column="tel"/>
+			<result property="email" column="email"/>
+			<result property="username" column="username"/>
+			<result property="pwd" column="pwd"/>
+		</resultMap>
+		<insert id="insert" parameterType="Jiaoshi">
+			insert into jiaoshi
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">name,</if>
+			<if test="sex != null">sex,</if>
+			<if test="xueyuan != null">xueyuan,</if>
+			<if test="tel != null">tel,</if>
+			<if test="email != null">email,</if>
+			<if test="username != null">username,</if>
+			<if test="pwd != null">pwd,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">#{name},</if>
+			<if test="sex != null">#{sex},</if>
+			<if test="xueyuan != null">#{xueyuan},</if>
+			<if test="tel != null">#{tel},</if>
+			<if test="email != null">#{email},</if>
+			<if test="username != null">#{username},</if>
+			<if test="pwd != null">#{pwd},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Jiaoshi">
+			update jiaoshi
+			<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">name=#{name},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="xueyuan != null">xueyuan=#{xueyuan},</if>
+			<if test="tel != null">tel=#{tel},</if>
+			<if test="email != null">email=#{email},</if>
+			<if test="username != null">username=#{username},</if>
+			<if test="pwd != null">pwd=#{pwd},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Jiaoshi">
+			delete from jiaoshi where id= #{id}
+		</delete>
+		<select id="list" resultType="Jiaoshi" resultMap="jiaoshiResult">
+			select * from  jiaoshi where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Jiaoshi" resultMap="jiaoshiResult">
+			select * from  jiaoshi where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="_int" resultType="Jiaoshi">
+			select * from  Jiaoshi  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from jiaoshi ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Jiaoshi">
+			select * from  jiaoshi ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>

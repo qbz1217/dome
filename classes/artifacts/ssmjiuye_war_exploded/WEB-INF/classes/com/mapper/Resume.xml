@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.mapper.ResumeMapper">
+		<resultMap type="Resume" id="resumeResult">
+			<id property="id" column="id"/>
+			<result property="member" column="member"/>
+			<result property="name" column="name"/>
+			<result property="jiguan" column="jiguan"/>
+			<result property="shengao" column="shengao"/>
+			<result property="tizhong" column="tizhong"/>
+			<result property="school" column="school"/>
+			<result property="zleibie" column="zleibie"/>
+			<result property="xueli" column="xueli"/>
+			<result property="mianmao" column="mianmao"/>
+			<result property="zfile" column="zfile"/>
+			<result property="yuexin" column="yuexin"/>
+			<result property="zhuanye" column="zhuanye"/>
+			<result property="gangwei" column="gangwei"/>
+			<result property="techang" column="techang"/>
+			<result property="jingli" column="jingli"/>
+			<result property="jieshao" column="jieshao"/>
+			<result property="hits" column="hits"/>
+			<result property="zt" column="zt"/>
+			<result property="uname" column="uname"/>
+			<result property="stime" column="stime"/>
+			<association property="member" column="memberfk" select="com.mapper.MemberMapper.get">
+			</association>
+		</resultMap>
+		<insert id="insert" parameterType="Resume">
+			insert into resume
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="member != null">member,</if>
+			<if test="name != null">name,</if>
+			<if test="jiguan != null">jiguan,</if>
+			<if test="shengao != null">shengao,</if>
+			<if test="tizhong != null">tizhong,</if>
+			<if test="school != null">school,</if>
+			<if test="zleibie != null">zleibie,</if>
+			<if test="xueli != null">xueli,</if>
+			<if test="mianmao != null">mianmao,</if>
+			<if test="zfile != null">zfile,</if>
+			<if test="yuexin != null">yuexin,</if>
+			<if test="zhuanye != null">zhuanye,</if>
+			<if test="gangwei != null">gangwei,</if>
+			<if test="techang != null">techang,</if>
+			<if test="jingli != null">jingli,</if>
+			<if test="jieshao != null">jieshao,</if>
+			<if test="hits != null">hits,</if>
+			<if test="zt != null">zt,</if>
+			<if test="uname != null">uname,</if>
+			<if test="stime != null">stime,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="member != null">#{member},</if>
+			<if test="name != null">#{name},</if>
+			<if test="jiguan != null">#{jiguan},</if>
+			<if test="shengao != null">#{shengao},</if>
+			<if test="tizhong != null">#{tizhong},</if>
+			<if test="school != null">#{school},</if>
+			<if test="zleibie != null">#{zleibie},</if>
+			<if test="xueli != null">#{xueli},</if>
+			<if test="mianmao != null">#{mianmao},</if>
+			<if test="zfile != null">#{zfile},</if>
+			<if test="yuexin != null">#{yuexin},</if>
+			<if test="zhuanye != null">#{zhuanye},</if>
+			<if test="gangwei != null">#{gangwei},</if>
+			<if test="techang != null">#{techang},</if>
+			<if test="jingli != null">#{jingli},</if>
+			<if test="jieshao != null">#{jieshao},</if>
+			<if test="hits != null">#{hits},</if>
+			<if test="zt != null">#{zt},</if>
+			<if test="uname != null">#{uname},</if>
+			<if test="stime != null">#{stime},</if>
+			</trim>
+		</insert>
+		<update id="update" parameterType="Resume">
+			update resume
+			<trim prefix="set" suffixOverrides=",">
+			<if test="member != null">member=#{member},</if>
+			<if test="name != null">name=#{name},</if>
+			<if test="jiguan != null">jiguan=#{jiguan},</if>
+			<if test="shengao != null">shengao=#{shengao},</if>
+			<if test="tizhong != null">tizhong=#{tizhong},</if>
+			<if test="school != null">school=#{school},</if>
+			<if test="zleibie != null">zleibie=#{zleibie},</if>
+			<if test="xueli != null">xueli=#{xueli},</if>
+			<if test="mianmao != null">mianmao=#{mianmao},</if>
+			<if test="zfile != null">zfile=#{zfile},</if>
+			<if test="yuexin != null">yuexin=#{yuexin},</if>
+			<if test="zhuanye != null">zhuanye=#{zhuanye},</if>
+			<if test="gangwei != null">gangwei=#{gangwei},</if>
+			<if test="techang != null">techang=#{techang},</if>
+			<if test="jingli != null">jingli=#{jingli},</if>
+			<if test="jieshao != null">jieshao=#{jieshao},</if>
+			<if test="hits != null">hits=#{hits},</if>
+			<if test="zt != null">zt=#{zt},</if>
+			<if test="uname != null">uname=#{uname},</if>
+			<if test="stime != null">stime=#{stime},</if>
+		</trim>
+			where id=#{id}
+		</update>
+		<delete id="delete" parameterType="Resume">
+			delete from resume where id= #{id}
+		</delete>
+		<select id="list" resultType="Resume" resultMap="resumeResult">
+			select * from  resume where 1=1 ${where} order by id desc
+			</select>
+		<select id="sealist" resultType="Resume" resultMap="resumeResult">
+			select * from  resume where 1=1 ${where} 
+			</select>
+		<select id="get" parameterType="int" resultType="Resume">
+			select * from  Resume  where id= #{id}
+		</select>
+			<select id="total" resultType="int" parameterType="String" >
+	        select count(*) from resume ${where}  
+	    </select>
+<select id="getsql" parameterType="String" resultType="Resume">
+			select * from  resume ${where} 
+		</select><update id="updatesql"  parameterType="String">
+${value}
+</update>
+<delete id="deletesql"  parameterType="String">
+${value}  
+</delete>
+	</mapper>
